@@ -21,6 +21,16 @@ export class App {
         const todoItemElement = item.completed
           ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button>編集</button> <button>削除</button></li>`
           : element`<li><input type="checkbox" class="checkbox">${item.title} <button>編集</button> <button>削除</button></li>`;
+
+        // TODO更新
+        const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
+        inputCheckboxElement.addEventListener("change", () => {
+          this.#todoListModel.updateTodo({
+            id: item.id,
+            completed: !item.completed
+          })
+        })
+
         todoListElement.appendChild(todoItemElement);
       })
       render(todoListElement, containerElement);
@@ -40,6 +50,7 @@ export class App {
       }));
       inputElement.value = ""
     });
+
 
   }
 }
