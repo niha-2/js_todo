@@ -19,8 +19,8 @@ export class App {
       const todoItems = this.#todoListModel.getTodoItems();
       todoItems.forEach(item => {
         const todoItemElement = item.completed
-          ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button>編集</button> <button>削除</button></li>`
-          : element`<li><input type="checkbox" class="checkbox">${item.title} <button>編集</button> <button>削除</button></li>`;
+          ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button>編集</button> <button class="delete">削除</button></li>`
+          : element`<li><input type="checkbox" class="checkbox">${item.title} <button>編集</button> <button class="delete">削除</button></li>`;
 
         // TODO更新
         const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
@@ -30,6 +30,14 @@ export class App {
             completed: !item.completed
           })
         })
+
+        // TODO削除
+        const deleteButtonElement = todoItemElement.querySelector(".delete");
+        deleteButtonElement.addEventListener("click", () => {
+          this.#todoListModel.deleteTodo({
+            id: item.id
+          });
+        });
 
         todoListElement.appendChild(todoItemElement);
       })
