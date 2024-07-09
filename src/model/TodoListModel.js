@@ -86,4 +86,18 @@ export class TodoListModel extends EventEmitter {
     this.emitChange();
   }
 
+  /**
+   * 指定したIDのTodoItemのTodoを更新する
+   * @param {id: number, title: string}
+   * @returns
+   */
+  editSaveTodo({ id, title }) {
+    const todoItem = this.#items.find(todo => todo.id === id);
+    if (!todoItem) {
+      return;
+    }
+    todoItem.title = title;
+    this.emitChange();
+  }
+
 }

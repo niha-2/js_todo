@@ -32,6 +32,14 @@ export class App {
     this.#todoListModel.deleteTodo({ id });
   }
 
+  /**
+   * TODOのタイトルを更新するときに呼ばれるリスナー関数
+   * @param {id: number, titile: string}
+   */
+  handleEditSave({ id, title }) {
+    this.#todoListModel.editSaveTodo({ id, title });
+  }
+
   mount() {
     const createButtonElement = document.querySelector("#create-btn");
     const inputElement = document.querySelector("#js-form-input");
@@ -46,6 +54,9 @@ export class App {
         },
         onDeleteTodo: ({ id }) => {
           this.handleDelete({ id });
+        },
+        onEditTodo: ({ id, title }) => {
+          this.handleEditSave({ id, title });
         }
       });
 

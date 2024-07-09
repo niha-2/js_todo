@@ -9,16 +9,18 @@ export class TodoListView {
    * @param {TodoItemModel[]} todoItems
    * @param {function({id: number, completed: boolean})} onUpdateTodo チェックボックスの更新イベントリスナー
    * @param {function({id: number})} onDeleteTodo 削除ボタンのクリックイベントリスナー
+   * @param {function({id: number, title: string})} onEditTodo 編集保存ボタンのクリックイベントリスナー
    * @returns {Element} TodoItemModelの配列に対応したリストのHTML要素
    */
-  createElement(todoItems, { onUpdateTodo, onDeleteTodo }) {
+  createElement(todoItems, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
     const todoListElement = element`<ul></ul>`;
     // 各TodoItemモデルに対応したHTML要素を作成し、リスト要素に追加
     todoItems.forEach(todoItem => {
       const todoItemView = new TodoItemView();
       const todoItemElement = todoItemView.createElement(todoItem, {
         onUpdateTodo,
-        onDeleteTodo
+        onDeleteTodo,
+        onEditTodo
       });
       todoListElement.appendChild(todoItemElement);
     });
