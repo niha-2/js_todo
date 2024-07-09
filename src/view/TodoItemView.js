@@ -28,9 +28,11 @@ export class TodoItemView {
     // TODO削除
     const deleteButtonElement = todoItemElement.querySelector(".delete");
     deleteButtonElement.addEventListener("click", () => {
-      onDeleteTodo({
-        id: todoItem.id
-      });
+      if (confirm("本当によろしいですか？")) {
+        onDeleteTodo({
+          id: todoItem.id
+        });
+      }
     });
 
     // TODO編集
